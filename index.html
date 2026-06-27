@@ -13,10 +13,13 @@
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #0b1329;
-            color: #f8fafc;
+            /* Vibrant Royal Blue Background Gradient */
+            background: linear-gradient(135deg, #0d2042 0%, #1e3a8a 50%, #152c5b 100%);
+            background-attachment: fixed;
+            color: #ffffff;
             line-height: 1.6;
             overflow-x: hidden;
+            margin: 0;
         }
         a {
             color: inherit;
@@ -29,21 +32,18 @@
             outline: none;
         }
         
-        /* Royal Blue Color Variables & Utility Classes */
+        /* Color Variables */
         :root {
-            --bg-dark: #070d1f;
-            --bg-base: #0b1329;
-            --bg-card: #131e3d;
-            --bg-card-hover: #1b2a54;
             --royal-deep: #1e3a8a;
             --royal-main: #2563eb;
             --royal-bright: #3b82f6;
             --royal-light: #60a5fa;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --royal-neon: #93c5fd;
             --premium-gold: #f59e0b;
             --premium-gold-hover: #d97706;
             --success: #10b981;
+            --bg-card: rgba(255, 255, 255, 0.12);
+            --border-card: rgba(255, 255, 255, 0.2);
         }
 
         /* Layout & Container */
@@ -54,6 +54,76 @@
             padding: 0 24px;
         }
 
+        /* ==================== KEYFRAME ANIMATIONS ==================== */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.15); }
+            100% { opacity: 0.4; transform: scale(1); }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200px 0; }
+            100% { background-position: 200px 0; }
+        }
+
+        @keyframes pulseBadge {
+            0% { box-shadow: 0 0 10px rgba(245, 158, 11, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(245, 158, 11, 0.8); }
+            100% { box-shadow: 0 0 10px rgba(245, 158, 11, 0.4); }
+        }
+
+        @keyframes waveAnimation {
+            0% { transform: rotate(0deg); }
+            20% { transform: rotate(14deg); }
+            40% { transform: rotate(-8deg); }
+            60% { transform: rotate(14deg); }
+            80% { transform: rotate(-4deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        /* Animated Background Orbs */
+        .bg-orb-1 {
+            position: absolute;
+            top: 10%;
+            left: 15%;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, rgba(30, 58, 138, 0) 70%);
+            filter: blur(40px);
+            animation: pulseGlow 8s infinite ease-in-out;
+            z-index: -1;
+        }
+        .bg-orb-2 {
+            position: absolute;
+            top: 40%;
+            right: 10%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.25) 0%, rgba(30, 58, 138, 0) 70%);
+            filter: blur(50px);
+            animation: pulseGlow 10s infinite ease-in-out;
+            z-index: -1;
+        }
+
         /* Typography */
         h1, h2, h3, h4 {
             font-weight: 800;
@@ -61,23 +131,23 @@
             letter-spacing: -0.02em;
         }
         .text-gradient {
-            background: linear-gradient(135deg, #ffffff 0%, var(--royal-light) 50%, var(--royal-bright) 100%);
+            background: linear-gradient(270deg, #ffffff, var(--royal-neon), var(--premium-gold), #ffffff);
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-        .text-gold {
-            color: var(--premium-gold);
+            animation: gradientShift 8s ease infinite;
         }
 
         /* Top Header / Navigation */
         header {
             position: sticky;
             top: 0;
-            z-index: 50;
-            background: rgba(11, 19, 41, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 100;
+            background: rgba(13, 32, 66, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
             padding: 16px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
         .nav-container {
             display: flex;
@@ -87,30 +157,35 @@
         .logo-group {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
         .logo-icon {
-            width: 38px;
-            height: 38px;
-            background: linear-gradient(135deg, var(--royal-bright), var(--royal-deep));
-            border-radius: 10px;
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--premium-gold), var(--royal-bright));
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 900;
-            font-size: 22px;
-            box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+            font-size: 26px;
+            color: #000;
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.6);
+            animation: spin 20s linear infinite;
         }
         .logo-text {
-            font-size: 24px;
-            font-weight: 800;
+            font-size: 26px;
+            font-weight: 900;
             letter-spacing: -0.5px;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(37, 99, 235, 0.5);
         }
         .logo-tagline {
             font-size: 11px;
-            color: var(--text-muted);
+            color: var(--royal-neon);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            font-weight: 700;
         }
         .nav-links {
             display: flex;
@@ -118,278 +193,308 @@
             align-items: center;
         }
         @media (max-width: 860px) {
-            .nav-links {
-                display: none;
-            }
+            .nav-links { display: none; }
         }
         .nav-link {
-            font-size: 15px;
-            font-weight: 500;
-            color: var(--text-muted);
-            transition: color 0.2s ease;
+            font-size: 16px;
+            font-weight: 600;
+            color: #e2e8f0;
+            transition: all 0.2s ease;
         }
         .nav-link:hover {
-            color: var(--text-main);
+            color: var(--premium-gold);
+            transform: translateY(-1px);
         }
         .user-mode-widget {
             display: flex;
             align-items: center;
             gap: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 6px 16px;
             border-radius: 30px;
             font-size: 14px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
         }
         .status-dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            background-color: var(--text-muted);
-            box-shadow: 0 0 8px var(--text-muted);
+            background-color: #cbd5e1;
+            box-shadow: 0 0 10px #cbd5e1;
         }
         .status-dot.premium {
             background-color: var(--premium-gold);
-            box-shadow: 0 0 10px var(--premium-gold);
+            box-shadow: 0 0 15px var(--premium-gold);
+            animation: pulseBadge 2s infinite;
         }
         .btn-premium-toggle {
             background: linear-gradient(135deg, var(--premium-gold), var(--premium-gold-hover));
             color: #000;
-            font-weight: 700;
-            padding: 6px 16px;
+            font-weight: 800;
+            padding: 8px 18px;
             border-radius: 20px;
-            font-size: 13px;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+            font-size: 14px;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.5);
             transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .btn-premium-toggle:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(245, 158, 11, 0.7);
+            background: linear-gradient(135deg, #fbeb3b, var(--premium-gold));
         }
 
         /* Hero Section */
         .hero {
-            padding: 90px 0 70px 0;
+            padding: 110px 0 90px 0;
             position: relative;
             text-align: center;
             overflow: hidden;
         }
-        .hero-bg-glow {
-            position: absolute;
-            top: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 800px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(37,99,235,0.25) 0%, rgba(11,19,41,0) 70%);
-            z-index: -1;
-        }
         .badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: rgba(37, 99, 235, 0.15);
-            border: 1px solid rgba(37, 99, 235, 0.3);
-            color: var(--royal-light);
-            padding: 6px 18px;
+            gap: 10px;
+            background: rgba(37, 99, 235, 0.35);
+            border: 2px solid var(--royal-light);
+            color: #ffffff;
+            padding: 8px 24px;
             border-radius: 30px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 24px;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 28px;
+            box-shadow: 0 0 30px rgba(37, 99, 235, 0.6);
+            animation: float 4s ease-in-out infinite;
         }
         .hero h1 {
-            font-size: 64px;
-            max-width: 900px;
-            margin: 0 auto 24px auto;
+            font-size: 68px;
+            max-width: 1000px;
+            margin: 0 auto 28px auto;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         @media (max-width: 768px) {
             .hero h1 { font-size: 42px; }
         }
         .hero p {
-            font-size: 20px;
-            color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto 40px auto;
+            font-size: 22px;
+            color: #e2e8f0;
+            max-width: 780px;
+            margin: 0 auto 46px auto;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+            line-height: 1.7;
         }
         .cta-group {
             display: flex;
             justify-content: center;
-            gap: 18px;
+            gap: 24px;
             flex-wrap: wrap;
         }
         .btn-primary {
-            background: linear-gradient(135deg, var(--royal-main), var(--royal-deep));
-            color: var(--text-main);
-            font-size: 18px;
-            font-weight: 700;
-            padding: 16px 36px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
-            transition: all 0.2s ease;
+            background: linear-gradient(135deg, #2563eb, #06b6d4);
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 800;
+            padding: 18px 42px;
+            border-radius: 16px;
+            box-shadow: 0 12px 35px rgba(6, 182, 212, 0.5);
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            border: 2px solid rgba(255,255,255,0.4);
         }
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.6);
-            background: linear-gradient(135deg, var(--royal-bright), var(--royal-main));
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 20px 45px rgba(6, 182, 212, 0.8);
+            background: linear-gradient(135deg, #3b82f6, #38bdf8);
         }
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: var(--text-main);
-            font-size: 18px;
-            font-weight: 600;
-            padding: 16px 36px;
-            border-radius: 12px;
-            transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 700;
+            padding: 18px 42px;
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
         }
 
         /* Features / The 3 Engines Section */
         .features {
-            padding: 60px 0 90px 0;
+            padding: 80px 0 110px 0;
             position: relative;
+            background: linear-gradient(180deg, rgba(13,32,66,0) 0%, rgba(13,32,66,0.6) 100%);
         }
         .section-header {
             text-align: center;
-            margin-bottom: 64px;
+            margin-bottom: 72px;
         }
         .section-header h2 {
-            font-size: 42px;
-            margin-bottom: 16px;
+            font-size: 46px;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.4);
         }
         .section-header p {
-            font-size: 18px;
-            color: var(--text-muted);
-            max-width: 600px;
+            font-size: 20px;
+            color: var(--royal-neon);
+            max-width: 680px;
             margin: 0 auto;
         }
         .grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 32px;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 36px;
         }
         .feature-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 40px 32px;
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 28px;
+            padding: 48px 36px;
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+        .feature-card:nth-child(2) {
+            animation-delay: 1s;
+            border-color: rgba(59, 130, 246, 0.4);
+            background: rgba(37, 99, 235, 0.15);
+        }
+        .feature-card:nth-child(3) {
+            animation-delay: 2s;
         }
         .feature-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(37, 99, 235, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transform: translateY(-12px) scale(1.02);
+            border-color: var(--premium-gold);
+            box-shadow: 0 30px 60px rgba(245, 158, 11, 0.4);
+            background: rgba(255, 255, 255, 0.18);
         }
         .feature-icon {
-            width: 64px;
-            height: 64px;
-            background: rgba(37, 99, 235, 0.15);
-            border: 1px solid rgba(37, 99, 235, 0.3);
-            border-radius: 16px;
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--royal-main), var(--royal-deep));
+            border: 2px solid var(--royal-light);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 24px;
-            color: var(--royal-bright);
+            margin-bottom: 28px;
+            color: #ffffff;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.5);
+            transition: transform 0.3s;
+        }
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(6deg);
+            background: linear-gradient(135deg, var(--premium-gold), var(--royal-bright));
+            border-color: #ffffff;
         }
         .feature-card h3 {
-            font-size: 24px;
+            font-size: 26px;
+            margin-bottom: 16px;
+            color: #ffffff;
+        }
+        .feature-card p {
+            color: #e2e8f0;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+        .tier-tag {
+            position: absolute;
+            top: 28px;
+            right: 28px;
+            font-size: 13px;
+            font-weight: 800;
+            padding: 6px 16px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .tag-free {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            border: 1px solid #a7f3d0;
+        }
+        .tag-premium {
+            background: linear-gradient(135deg, var(--premium-gold), var(--premium-gold-hover));
+            color: #000000;
+            border: 1px solid #fef3c7;
+            animation: pulseBadge 2s infinite;
+        }
+
+        /* Interactive Creator Studio */
+        .creator-studio {
+            padding: 60px 0 120px 0;
+            position: relative;
+        }
+        .studio-wrapper {
+            background: rgba(13, 32, 66, 0.75);
+            backdrop-filter: blur(24px);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            border-radius: 36px;
+            padding: 56px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+        @media (max-width: 768px) {
+            .studio-wrapper { padding: 32px 20px; }
+        }
+        .studio-banner {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.8), rgba(30, 58, 138, 0.9));
+            border: 2px solid var(--premium-gold);
+            border-radius: 24px;
+            padding: 32px 40px;
+            margin-bottom: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 24px;
+            box-shadow: 0 15px 40px rgba(245, 158, 11, 0.3);
+        }
+        .banner-left h4 {
+            font-size: 26px;
+            margin-bottom: 8px;
+            color: #ffffff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+        .banner-left p {
+            color: #f8fafc;
+            font-size: 17px;
+        }
+        
+        /* Step Sections */
+        .step-section {
+            margin-bottom: 52px;
+        }
+        .step-label {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--premium-gold);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
             margin-bottom: 14px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        .feature-card p {
-            color: var(--text-muted);
-            font-size: 16px;
-            line-height: 1.7;
-        }
-        .tier-tag {
-            position: absolute;
-            top: 24px;
-            right: 24px;
-            font-size: 12px;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 20px;
-            text-transform: uppercase;
-        }
-        .tag-free {
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--success);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-        }
-        .tag-premium {
-            background: rgba(245, 158, 11, 0.15);
-            color: var(--premium-gold);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-        }
-
-        /* Interactive Creator Studio */
-        .creator-studio {
-            padding: 40px 0 100px 0;
-            background: linear-gradient(180deg, var(--bg-base) 0%, var(--bg-dark) 100%);
-            id: studio;
-        }
-        .studio-wrapper {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 28px;
-            padding: 48px;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
-            position: relative;
-        }
-        @media (max-width: 768px) {
-            .studio-wrapper { padding: 28px 20px; }
-        }
-        .studio-banner {
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.6), rgba(15, 23, 42, 0.8));
-            border: 1px solid var(--royal-main);
-            border-radius: 18px;
-            padding: 24px 32px;
-            margin-bottom: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .banner-left h4 {
-            font-size: 22px;
-            margin-bottom: 6px;
-        }
-        .banner-left p {
-            color: var(--text-muted);
-            font-size: 15px;
-        }
-        
-        /* Step Sections */
-        .step-section {
-            margin-bottom: 44px;
-        }
-        .step-label {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--royal-light);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
         .step-title {
-            font-size: 28px;
-            margin-bottom: 24px;
+            font-size: 32px;
+            margin-bottom: 28px;
             font-weight: 800;
+            color: #ffffff;
         }
 
         /* Step 1 Input Controls */
@@ -397,49 +502,53 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 14px;
         }
         .input-tabs {
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
         .tab-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 10px 22px;
-            border-radius: 12px;
-            color: var(--text-muted);
-            font-weight: 600;
-            font-size: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 26px;
+            border-radius: 16px;
+            color: #cbd5e1;
+            font-weight: 700;
+            font-size: 16px;
             transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         .tab-btn.active {
-            background: var(--royal-main);
-            color: var(--text-main);
-            border-color: var(--royal-bright);
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            background: linear-gradient(135deg, var(--royal-main), var(--royal-bright));
+            color: #ffffff;
+            border-color: #ffffff;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
         }
         .tab-btn:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
         }
         .btn-sample {
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: var(--success);
-            padding: 10px 20px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 14px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border: 2px solid #a7f3d0;
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 15px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
             transition: all 0.2s;
         }
         .btn-sample:hover {
-            background: rgba(16, 185, 129, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.6);
+            background: linear-gradient(135deg, #34d399, #10b981);
         }
         .textarea-box {
             position: relative;
@@ -447,266 +556,309 @@
         }
         textarea {
             width: 100%;
-            height: 220px;
-            background: rgba(7, 13, 31, 0.7);
-            border: 2px solid rgba(255, 255, 255, 0.12);
-            border-radius: 18px;
-            padding: 24px;
-            color: var(--text-main);
-            font-size: 16px;
-            line-height: 1.6;
+            height: 240px;
+            background: rgba(5, 11, 26, 0.85);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            border-radius: 24px;
+            padding: 28px;
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 1.7;
             resize: vertical;
             font-family: inherit;
-            transition: border-color 0.2s;
+            box-shadow: inset 0 4px 20px rgba(0,0,0,0.5);
+            transition: all 0.3s;
         }
         textarea:focus {
-            border-color: var(--royal-bright);
+            border-color: var(--premium-gold);
+            box-shadow: inset 0 4px 20px rgba(0,0,0,0.5), 0 0 25px rgba(245, 158, 11, 0.5);
             outline: none;
         }
         .char-counter {
             text-align: right;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-muted);
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--royal-neon);
+            margin-top: 8px;
         }
         .char-counter.limit-exceeded {
-            color: #ef4444;
+            color: #ff5252;
+            animation: pulseBadge 1s infinite;
         }
 
         /* Step 2 Mode Selector */
         .mode-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin-bottom: 32px;
+            gap: 28px;
+            margin-bottom: 36px;
         }
         .mode-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 2px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 28px 24px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 32px 28px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
         .mode-card.active {
-            border-color: var(--royal-bright);
-            background: rgba(37, 99, 235, 0.1);
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+            border-color: var(--premium-gold);
+            background: rgba(37, 99, 235, 0.25);
+            box-shadow: 0 15px 40px rgba(245, 158, 11, 0.4);
         }
         .mode-card:hover:not(.locked) {
-            border-color: rgba(37, 99, 235, 0.4);
-            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--royal-light);
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
         }
         .mode-card.locked {
-            opacity: 0.6;
+            opacity: 0.7;
             cursor: not-allowed;
         }
         .lock-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(7, 13, 31, 0.85);
-            backdrop-filter: blur(4px);
+            background: rgba(13, 32, 66, 0.92);
+            backdrop-filter: blur(6px);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 20px;
+            padding: 24px;
             z-index: 10;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.2s;
+            transition: opacity 0.3s;
         }
         .mode-card.locked .lock-overlay {
             opacity: 1;
             pointer-events: auto;
         }
         .lock-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(245, 158, 11, 0.2);
-            border: 1px solid var(--premium-gold);
+            width: 54px;
+            height: 54px;
+            background: linear-gradient(135deg, var(--premium-gold), var(--premium-gold-hover));
+            border: 2px solid #fff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--premium-gold);
-            margin-bottom: 12px;
+            color: #000;
+            margin-bottom: 14px;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.6);
+            animation: pulseBadge 2s infinite;
         }
         .mode-icon {
-            width: 54px;
-            height: 54px;
-            background: var(--royal-deep);
-            border-radius: 14px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--royal-main), var(--royal-deep));
+            border: 2px solid rgba(255,255,255,0.4);
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-            color: var(--text-main);
+            margin-bottom: 24px;
+            color: #ffffff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
         .mode-card h4 {
-            font-size: 22px;
-            margin-bottom: 8px;
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #ffffff;
         }
         .mode-card p {
-            color: var(--text-muted);
-            font-size: 14px;
+            color: #cbd5e1;
+            font-size: 15px;
+            line-height: 1.6;
         }
 
         /* Options Selector */
         .sub-options-box {
-            background: rgba(7, 13, 31, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 32px;
+            background: rgba(5, 11, 26, 0.7);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 22px;
+            padding: 32px;
+            margin-bottom: 36px;
+            box-shadow: inset 0 4px 20px rgba(0,0,0,0.3);
         }
         .sub-options-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            color: var(--royal-light);
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--royal-neon);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .options-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 14px;
         }
         .option-chip {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-size: 15px;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         .option-chip.active {
-            background: var(--royal-main);
-            color: var(--text-main);
-            border-color: var(--royal-bright);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            background: linear-gradient(135deg, var(--royal-main), var(--royal-bright));
+            color: #ffffff;
+            border-color: var(--premium-gold);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.6);
+            transform: translateY(-2px);
         }
         .option-chip:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
         }
 
-        /* Generate Button & Loading State */
+        /* Generate Button & Animated Loading State */
         .btn-generate {
             width: 100%;
-            padding: 22px;
-            font-size: 22px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--royal-main), var(--royal-deep));
-            color: var(--text-main);
-            border-radius: 18px;
-            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.4);
+            padding: 24px;
+            font-size: 24px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--premium-gold), var(--premium-gold-hover));
+            color: #000000;
+            border-radius: 22px;
+            box-shadow: 0 15px 40px rgba(245, 158, 11, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 14px;
+            gap: 16px;
             transition: all 0.3s;
+            border: 2px solid #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .btn-generate:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 18px 40px rgba(37, 99, 235, 0.6);
-            background: linear-gradient(135deg, var(--royal-bright), var(--royal-main));
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 22px 50px rgba(245, 158, 11, 0.8);
+            background: linear-gradient(135deg, #fbeb3b, var(--premium-gold));
         }
         
         .loading-container {
             display: none;
+            background: rgba(5, 11, 26, 0.85);
+            border: 2px solid var(--royal-bright);
+            border-radius: 24px;
+            padding: 48px 36px;
             text-align: center;
-            padding: 40px 0;
+            box-shadow: 0 20px 50px rgba(37, 99, 235, 0.4);
         }
-        .spinner {
-            width: 60px;
-            height: 60px;
-            border: 5px solid rgba(255, 255, 255, 0.1);
-            border-top-color: var(--royal-bright);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 24px auto;
+        
+        /* Custom Animated Progress Bar */
+        .progress-bar-wrapper {
+            width: 100%;
+            max-width: 600px;
+            height: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            margin: 0 auto 28px auto;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--royal-main), var(--premium-gold), #06b6d4);
+            background-size: 200% 100%;
+            border-radius: 30px;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.8);
+            transition: width 0.5s ease;
+            animation: shimmer 2s infinite linear;
         }
+        
         .loading-status {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 8px;
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 10px rgba(37, 99, 235, 0.5);
         }
         .loading-sub {
-            color: var(--text-muted);
-            font-size: 15px;
+            color: var(--royal-neon);
+            font-size: 17px;
+            font-weight: 600;
         }
 
         /* Output Presentation Display */
         .output-container {
             display: none;
-            margin-top: 48px;
-            border-top: 2px solid rgba(255, 255, 255, 0.1);
-            padding-top: 48px;
+            margin-top: 64px;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            padding-top: 64px;
         }
         .output-card {
-            background: rgba(7, 13, 31, 0.6);
-            border: 1px solid rgba(37, 99, 235, 0.4);
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            background: rgba(5, 11, 26, 0.85);
+            border: 2px solid var(--premium-gold);
+            border-radius: 32px;
+            padding: 48px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6), 0 0 40px rgba(245, 158, 11, 0.4);
         }
         @media (max-width: 768px) {
-            .output-card { padding: 24px 16px; }
+            .output-card { padding: 32px 20px; }
         }
         .output-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 32px;
+            margin-bottom: 40px;
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 20px;
         }
         .output-title-group {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 20px;
+            flex-wrap: wrap;
         }
         .output-badge {
-            background: var(--royal-main);
+            background: linear-gradient(135deg, var(--royal-main), var(--royal-bright));
             color: #fff;
-            padding: 8px 16px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 14px;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+            padding: 10px 20px;
+            border-radius: 16px;
+            font-weight: 800;
+            font-size: 15px;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+            border: 1px solid #fff;
+            text-transform: uppercase;
         }
         .output-title {
-            font-size: 26px;
-            font-weight: 800;
+            font-size: 30px;
+            font-weight: 900;
+            color: #ffffff;
         }
         .btn-download {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 12px 24px;
-            border-radius: 14px;
-            color: var(--text-main);
-            font-weight: 700;
-            font-size: 15px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border: 2px solid #a7f3d0;
+            padding: 14px 28px;
+            border-radius: 18px;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 16px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            transition: all 0.2s;
+            gap: 12px;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.5);
+            transition: all 0.3s;
         }
         .btn-download:hover {
-            background: var(--royal-bright);
-            border-color: var(--royal-bright);
-            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.7);
+            background: linear-gradient(135deg, #34d399, #10b981);
         }
 
         /* Mode Specific Outputs */
@@ -714,78 +866,112 @@
             display: none;
         }
         .music-player-box {
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(11, 19, 41, 0.8));
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            padding: 32px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.4), rgba(13, 32, 66, 0.9));
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            border-radius: 28px;
+            padding: 48px;
             text-align: center;
-            margin-bottom: 36px;
+            margin-bottom: 44px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
         }
-        .vinyl-cover {
-            width: 140px;
-            height: 140px;
-            background: linear-gradient(135deg, var(--royal-bright), var(--royal-deep));
-            border-radius: 24px;
-            margin: 0 auto 24px auto;
+        /* Spinning Vinyl Animation */
+        .vinyl-wrapper {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 32px auto;
+        }
+        .vinyl-record {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #1e3a8a 0%, #091329 40%, #050b14 80%, #000000 100%);
+            border: 6px solid var(--premium-gold);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.4);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 30px rgba(37, 99, 235, 0.5);
+            animation: spin 6s linear infinite;
+        }
+        .vinyl-center {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--premium-gold), var(--royal-bright));
+            border-radius: 50%;
+            border: 4px solid #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: 900;
+            font-size: 24px;
         }
         .song-title {
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 8px;
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
         .song-genre {
-            color: var(--royal-light);
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 24px;
+            color: var(--royal-neon);
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         audio {
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto;
-            border-radius: 12px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .lyrics-box {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 18px;
-            padding: 32px;
-            max-height: 400px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            padding: 40px;
+            max-height: 450px;
             overflow-y: auto;
+            box-shadow: inset 0 4px 20px rgba(0,0,0,0.5);
         }
         .lyrics-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--royal-light);
-            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--premium-gold);
+            margin-bottom: 24px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         .lyrics-text {
-            font-size: 18px;
-            line-height: 2;
-            color: var(--text-main);
+            font-size: 20px;
+            line-height: 2.2;
+            color: #f8fafc;
             white-space: pre-line;
+            font-weight: 500;
         }
 
         /* Anime Output */
         .anime-frame {
             position: relative;
-            border-radius: 20px;
+            border-radius: 28px;
             overflow: hidden;
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            margin-bottom: 32px;
+            border: 4px solid var(--premium-gold);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(245, 158, 11, 0.5);
+            margin-bottom: 40px;
         }
         .anime-image {
             width: 100%;
             height: auto;
             display: block;
-            max-height: 550px;
+            max-height: 600px;
             object-fit: cover;
         }
         .anime-subtitle-overlay {
@@ -793,247 +979,281 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 100%);
-            padding: 40px 32px 24px 32px;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.95) 100%);
+            padding: 50px 40px 32px 40px;
             text-align: center;
         }
         .anime-subtitle-text {
-            font-size: 24px;
-            font-weight: 700;
-            color: #fff;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            font-size: 28px;
+            font-weight: 800;
+            color: #ffffff;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9);
             letter-spacing: 0.5px;
         }
         .anime-script-box {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 18px;
-            padding: 32px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: inset 0 4px 20px rgba(0,0,0,0.5);
         }
         .anime-script-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--royal-light);
-            margin-bottom: 16px;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--royal-neon);
+            margin-bottom: 24px;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .script-dialogue {
-            font-size: 17px;
-            line-height: 1.8;
-            color: var(--text-muted);
-            margin-bottom: 16px;
+            font-size: 18px;
+            line-height: 1.9;
+            color: #cbd5e1;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
+        .script-dialogue:last-child { border: none; margin-bottom: 0; padding-bottom: 0; }
         .script-dialogue strong {
-            color: var(--text-main);
+            color: var(--premium-gold);
+            font-size: 19px;
         }
 
         /* Novel Output */
         .novel-reader {
-            background: #0f172a;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 20px;
-            padding: 48px 56px;
-            box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
+            background: #091329;
+            border: 2px solid var(--royal-bright);
+            border-radius: 28px;
+            padding: 56px 64px;
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.8), 0 20px 50px rgba(0,0,0,0.5);
         }
         @media (max-width: 768px) {
-            .novel-reader { padding: 28px 20px; }
+            .novel-reader { padding: 32px 20px; }
         }
         .novel-chapter {
-            font-size: 16px;
-            font-weight: 700;
+            font-size: 17px;
+            font-weight: 800;
             color: var(--premium-gold);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
+            letter-spacing: 2.5px;
+            margin-bottom: 14px;
         }
         .novel-title {
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: 32px;
-            color: var(--text-main);
+            font-size: 40px;
+            font-weight: 900;
+            margin-bottom: 36px;
+            color: #ffffff;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
         .novel-body {
-            font-size: 19px;
-            line-height: 1.9;
-            color: #e2e8f0;
+            font-size: 21px;
+            line-height: 2;
+            color: #f1f5f9;
             text-align: justify;
         }
         .novel-body p {
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
         .concept-highlight {
-            color: var(--royal-light);
-            font-weight: 700;
-            background: rgba(37, 99, 235, 0.15);
-            padding: 2px 6px;
-            border-radius: 6px;
-            border: 1px solid rgba(37, 99, 235, 0.3);
+            color: var(--premium-gold);
+            font-weight: 800;
+            background: rgba(245, 158, 11, 0.15);
+            padding: 4px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
         }
 
         /* Pricing Section */
         .pricing {
-            padding: 80px 0 100px 0;
-            background: var(--bg-base);
+            padding: 100px 0 120px 0;
+            background: linear-gradient(180deg, rgba(13,32,66,0.6) 0%, rgba(13,32,66,0.95) 100%);
             position: relative;
         }
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 36px;
-            max-width: 960px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 44px;
+            max-width: 1000px;
             margin: 0 auto;
         }
         .pricing-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 28px;
-            padding: 48px 40px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 36px;
+            padding: 56px 48px;
             position: relative;
-            transition: all 0.3s;
+            transition: all 0.4s;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
         .pricing-card.popular {
-            border: 2px solid var(--premium-gold);
-            background: linear-gradient(180deg, var(--bg-card) 0%, rgba(20, 32, 66, 0.9) 100%);
-            box-shadow: 0 20px 60px rgba(245, 158, 11, 0.2);
+            border: 4px solid var(--premium-gold);
+            background: linear-gradient(180deg, rgba(37, 99, 235, 0.25) 0%, rgba(15, 23, 42, 0.95) 100%);
+            box-shadow: 0 25px 70px rgba(245, 158, 11, 0.4);
+            transform: scale(1.03);
+        }
+        @media (max-width: 768px) {
+            .pricing-card.popular { transform: scale(1); }
+            .pricing-card { padding: 40px 28px; }
         }
         .popular-badge {
             position: absolute;
-            top: -16px;
+            top: -20px;
             left: 50%;
             transform: translateX(-50%);
             background: linear-gradient(135deg, var(--premium-gold), var(--premium-gold-hover));
             color: #000;
-            font-weight: 800;
-            font-size: 13px;
+            font-weight: 900;
+            font-size: 15px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 6px 20px;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+            letter-spacing: 1.5px;
+            padding: 10px 28px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.5);
+            border: 2px solid #fff;
+            animation: pulseBadge 2s infinite;
         }
         .tier-header {
-            margin-bottom: 32px;
+            margin-bottom: 40px;
         }
         .tier-name {
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 12px;
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 14px;
+            color: #ffffff;
         }
         .tier-price {
-            font-size: 54px;
+            font-size: 64px;
             font-weight: 900;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             display: flex;
             align-items: baseline;
+            color: #ffffff;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.4);
         }
         .price-period {
-            font-size: 18px;
-            color: var(--text-muted);
-            font-weight: 500;
+            font-size: 20px;
+            color: var(--royal-neon);
+            font-weight: 600;
         }
         .tier-desc {
-            color: var(--text-muted);
-            font-size: 15px;
+            color: #cbd5e1;
+            font-size: 17px;
+            line-height: 1.6;
         }
         .feature-list {
             list-style: none;
-            margin-bottom: 44px;
+            margin-bottom: 52px;
         }
         .feature-item {
             display: flex;
             align-items: center;
-            gap: 14px;
-            font-size: 16px;
-            margin-bottom: 18px;
-            color: var(--text-main);
+            gap: 16px;
+            font-size: 17px;
+            margin-bottom: 22px;
+            color: #ffffff;
+            font-weight: 500;
         }
         .feature-item.omitted {
-            color: var(--text-muted);
-            opacity: 0.5;
+            color: #94a3b8;
+            opacity: 0.6;
         }
         .icon-check {
             color: var(--success);
             flex-shrink: 0;
+            width: 24px;
+            height: 24px;
         }
         .icon-cross {
             color: #ef4444;
             flex-shrink: 0;
+            width: 24px;
+            height: 24px;
         }
         .btn-tier {
             width: 100%;
-            padding: 18px;
-            font-size: 18px;
-            font-weight: 700;
-            border-radius: 16px;
+            padding: 22px;
+            font-size: 20px;
+            font-weight: 800;
+            border-radius: 20px;
             text-align: center;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .btn-tier-free {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
         }
         .btn-tier-free:hover {
-            background: rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
         }
         .btn-tier-premium {
             background: linear-gradient(135deg, var(--premium-gold), var(--premium-gold-hover));
-            color: #000;
-            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4);
+            color: #000000;
+            box-shadow: 0 12px 35px rgba(245, 158, 11, 0.5);
+            border: 2px solid #fff;
         }
         .btn-tier-premium:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.6);
+            transform: translateY(-4px);
+            box-shadow: 0 18px 45px rgba(245, 158, 11, 0.7);
+            background: linear-gradient(135deg, #fbeb3b, var(--premium-gold));
         }
 
         /* FAQ Section */
         .faq {
-            padding: 60px 0 100px 0;
-            background: var(--bg-dark);
+            padding: 100px 0 140px 0;
+            background: #09152b;
         }
         .faq-list {
-            max-width: 840px;
+            max-width: 900px;
             margin: 0 auto;
         }
         .faq-item {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 18px;
-            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            margin-bottom: 24px;
             overflow: hidden;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            backdrop-filter: blur(12px);
         }
         .faq-question {
-            padding: 24px 32px;
-            font-size: 19px;
-            font-weight: 700;
+            padding: 28px 36px;
+            font-size: 21px;
+            font-weight: 800;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            color: var(--text-main);
+            color: #ffffff;
         }
         .faq-answer {
-            padding: 0 32px 28px 32px;
-            font-size: 16px;
-            color: var(--text-muted);
-            line-height: 1.8;
+            padding: 0 36px 32px 36px;
+            font-size: 18px;
+            color: #cbd5e1;
+            line-height: 1.9;
             display: none;
         }
         .faq-item.active {
-            border-color: rgba(37, 99, 235, 0.4);
-            background: var(--bg-card-hover);
+            border-color: var(--royal-bright);
+            background: rgba(37, 99, 235, 0.2);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
         }
         .faq-item.active .faq-answer {
             display: block;
         }
         .faq-toggle-icon {
-            font-size: 24px;
-            color: var(--royal-light);
-            transition: transform 0.2s;
+            font-size: 28px;
+            color: var(--premium-gold);
+            transition: transform 0.3s;
+            font-weight: 900;
         }
         .faq-item.active .faq-toggle-icon {
             transform: rotate(45deg);
@@ -1041,57 +1261,66 @@
 
         /* Footer */
         footer {
-            background: #050914;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 64px 0 40px 0;
-            color: var(--text-muted);
-            font-size: 15px;
+            background: #040914;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 80px 0 50px 0;
+            color: #94a3b8;
+            font-size: 16px;
         }
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 48px;
-            margin-bottom: 64px;
+            gap: 56px;
+            margin-bottom: 80px;
         }
         @media (max-width: 768px) {
-            .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
         }
         .footer-desc {
-            margin-top: 16px;
-            max-width: 360px;
-            line-height: 1.7;
+            margin-top: 20px;
+            max-width: 400px;
+            line-height: 1.8;
+            color: #cbd5e1;
         }
         .footer-title {
-            font-size: 17px;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 24px;
+            font-size: 19px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 28px;
         }
         .footer-links {
             list-style: none;
         }
         .footer-links li {
-            margin-bottom: 14px;
+            margin-bottom: 16px;
+        }
+        .footer-links a {
+            transition: color 0.2s;
         }
         .footer-links a:hover {
-            color: var(--text-main);
+            color: var(--premium-gold);
         }
         .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 36px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 20px;
+            color: #cbd5e1;
         }
         .brand-highlight {
-            color: var(--royal-light);
-            font-weight: 600;
+            color: var(--premium-gold);
+            font-weight: 800;
         }
     </style>
 </head>
 <body>
+
+    <!-- Background Animated Orbs -->
+    <div class="bg-orb-1"></div>
+    <div class="bg-orb-2"></div>
 
     <!-- Header Navigation -->
     <header>
@@ -1121,10 +1350,9 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-bg-glow"></div>
         <div class="container">
             <div class="badge">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-2 2.5-3-1-1 3-3 1 1 3-2 2.5 2 2.5-1 3 3 1 1 3 3-1 2 2.5 2-2.5 3 1 1-3 3-1-1-3 2-2.5-2-2.5 1-3-3-1-1-3-3 1-2-2.5Z"/><path d="m9 12 2 2 4-4"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-2 2.5-3-1-1 3-3 1 1 3-2 2.5 2 2.5-1 3 3 1 1 3 3-1 2 2.5 2-2.5 3 1 1-3 3-1-1-3 2-2.5-2-2.5 1-3-3-1-1-3-3 1-2-2.5Z"/><path d="m9 12 2 2 4-4"/></svg>
                 Next-Gen AI Edutainment Platform | All Music Genres Included
             </div>
             <h1>Stop Memorizing. <span class="text-gradient">Start Experiencing.</span></h1>
@@ -1132,7 +1360,7 @@
             
             <div class="cta-group">
                 <a href="#studio" class="btn-primary">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                     Launch Creator Suite
                 </a>
                 <a href="#pricing" class="btn-secondary">View Premium Tiers</a>
@@ -1153,7 +1381,7 @@
                 <div class="feature-card">
                     <div class="tier-tag tag-free">Free & Premium</div>
                     <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
                     </div>
                     <h3>Sonic Rap & Song Studio</h3>
                     <p>Auditory learner? Turn dense textbook paragraphs into incredibly catchy music tracks. The free tier gives you access to 100-character teasers across any music genre, from 90s Boom Bap to Lo-Fi Chill.</p>
@@ -1163,7 +1391,7 @@
                 <div class="feature-card">
                     <div class="tier-tag tag-premium">Premium Only</div>
                     <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2"/></svg>
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2"/></svg>
                     </div>
                     <h3>Anime & Animation Lab</h3>
                     <p>Visual learner? Watch your study materials come to life as premium anime clips. Our pipeline generates an AI voiceover script and stitches together cinematic visual clips so you can watch your homework.</p>
@@ -1173,7 +1401,7 @@
                 <div class="feature-card">
                     <div class="tier-tag tag-premium">Premium Only</div>
                     <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 5h10"/><path d="M6 9h10"/></svg>
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 5h10"/><path d="M6 9h10"/></svg>
                     </div>
                     <h3>Immersive Novel Builder</h3>
                     <p>Love stories? Weave difficult academic concepts into gripping sci-fi adventures, murder mysteries, or high fantasy tales. Easily understand complex definitions through rich storytelling.</p>
@@ -1194,7 +1422,7 @@
                         <p id="banner-desc">You are currently testing the Free Tier: 100-character limit, Music/Song generation only.</p>
                     </div>
                     <div>
-                        <button id="banner-toggle-btn" class="btn-premium-toggle" style="padding: 12px 24px; font-size: 15px;" onclick="togglePremium()">
+                        <button id="banner-toggle-btn" class="btn-premium-toggle" style="padding: 14px 28px; font-size: 16px;" onclick="togglePremium()">
                             🚀 Unlock Premium Simulation Mode
                         </button>
                     </div>
@@ -1211,7 +1439,7 @@
                             <button class="tab-btn" onclick="switchTab('upload')">Upload Document (PDF/DOCX)</button>
                         </div>
                         <button class="btn-sample" onclick="loadSampleText()">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
                             Insert Sample Biology Notes
                         </button>
                     </div>
@@ -1231,7 +1459,7 @@
                         <!-- Mode 1: Music -->
                         <div id="mode-music" class="mode-card active" onclick="selectMode('music')">
                             <div class="mode-icon">
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
                             </div>
                             <h4>Song & Rap Studio</h4>
                             <p>Generate a rhythmic, factual hit track to listen to on the go.</p>
@@ -1241,13 +1469,13 @@
                         <div id="mode-anime" class="mode-card locked" onclick="selectMode('anime')">
                             <div class="lock-overlay">
                                 <div class="lock-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                                 </div>
-                                <h4 style="color: #fff; font-size: 18px; margin-bottom: 6px;">Premium Feature</h4>
-                                <p style="color: #cbd5e1; font-size: 13px;">Unlock Premium Simulation above to transform notes into Anime!</p>
+                                <h4 style="color: #fff; font-size: 22px; margin-bottom: 8px;">Premium Feature</h4>
+                                <p style="color: #cbd5e1; font-size: 15px;">Unlock Premium Simulation above to transform notes into Anime!</p>
                             </div>
                             <div class="mode-icon" style="background: var(--royal-main);">
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2"/></svg>
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2"/></svg>
                             </div>
                             <h4>Anime & Animation Lab</h4>
                             <p>Turn notes into an animated Japanese-style short film with voiceover.</p>
@@ -1257,13 +1485,13 @@
                         <div id="mode-novel" class="mode-card locked" onclick="selectMode('novel')">
                             <div class="lock-overlay">
                                 <div class="lock-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                                 </div>
-                                <h4 style="color: #fff; font-size: 18px; margin-bottom: 6px;">Premium Feature</h4>
-                                <p style="color: #cbd5e1; font-size: 13px;">Unlock Premium Simulation above to transform notes into Novels!</p>
+                                <h4 style="color: #fff; font-size: 22px; margin-bottom: 8px;">Premium Feature</h4>
+                                <p style="color: #cbd5e1; font-size: 15px;">Unlock Premium Simulation above to transform notes into Novels!</p>
                             </div>
                             <div class="mode-icon" style="background: var(--royal-bright);">
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 5h10"/><path d="M6 9h10"/></svg>
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 5h10"/><path d="M6 9h10"/></svg>
                             </div>
                             <h4>Immersive Novel Builder</h4>
                             <p>Absorb core concepts through thrilling fiction & mystery stories.</p>
@@ -1286,15 +1514,17 @@
                 <!-- Step 3: Generate -->
                 <div class="step-section" style="margin-bottom: 0;">
                     <button id="btn-generate" class="btn-generate" onclick="startGeneration()">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
                         Transform Study Material Now
                     </button>
 
-                    <!-- Loading Animation -->
+                    <!-- Custom Animated Loading Progress Bar -->
                     <div id="loading-box" class="loading-container">
-                        <div class="spinner"></div>
+                        <div class="progress-bar-wrapper">
+                            <div id="progress-fill" class="progress-bar-fill"></div>
+                        </div>
                         <div id="loading-text" class="loading-status">Parsing Study Concepts...</div>
-                        <div class="loading-sub">InfinitEd AI orchestrator is working its magic</div>
+                        <div class="loading-sub">InfinitEd AI orchestrator is synthesizing your master media file</div>
                     </div>
                 </div>
 
@@ -1307,7 +1537,7 @@
                                 <h3 id="output-title" class="output-title">Mitosis & Cell Division (Boom Bap Anthem)</h3>
                             </div>
                             <button class="btn-download" onclick="alert('File download initiated successfully!')">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
                                 Download Asset
                             </button>
                         </div>
@@ -1315,8 +1545,10 @@
                         <!-- 1. Music Output View -->
                         <div id="view-music" class="music-output">
                             <div class="music-player-box">
-                                <div class="vinyl-cover">
-                                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                                <div class="vinyl-wrapper">
+                                    <div class="vinyl-record">
+                                        <div class="vinyl-center">∞</div>
+                                    </div>
                                 </div>
                                 <div class="song-title">Mitosis Breakdown (Educational Rap)</div>
                                 <div class="song-genre">Genre: 90s Boom Bap Rap</div>
@@ -1329,7 +1561,10 @@
                             </div>
 
                             <div class="lyrics-box">
-                                <div class="lyrics-title">Generated Educational Lyrics</div>
+                                <div class="lyrics-title">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                                    Generated Educational Lyrics
+                                </div>
                                 <div class="lyrics-text">Yo, listen up, let's break down mitosis!
 Cell division, keeping focus.
 Prophase starts, chromosomes pack tight.
@@ -1399,31 +1634,31 @@ That is how the body grows every day!</div>
 
                         <ul class="feature-list">
                             <li class="feature-item">
-                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
                                 <span><strong>Song & Rap Generator</strong> access</span>
                             </li>
                             <li class="feature-item">
-                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
                                 <span><strong>Any music genre</strong> included</span>
                             </li>
                             <li class="feature-item">
-                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
                                 <span>100-character input teaser limit</span>
                             </li>
                             <li class="feature-item">
-                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
                                 <span>Limited monthly uses (3-5 generations)</span>
                             </li>
                             <li class="feature-item omitted">
-                                <svg class="icon-cross" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                                <svg class="icon-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
                                 <span>Anime & Animation mode locked</span>
                             </li>
                             <li class="feature-item omitted">
-                                <svg class="icon-cross" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                                <svg class="icon-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
                                 <span>Novel & Story mode locked</span>
                             </li>
                             <li class="feature-item omitted">
-                                <svg class="icon-cross" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                                <svg class="icon-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
                                 <span>Standard server queue speed</span>
                             </li>
                         </ul>
@@ -1444,31 +1679,31 @@ That is how the body grows every day!</div>
 
                         <ul class="feature-list">
                             <li class="feature-item">
-                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
                                 <span><strong>Access to EVERYTHING</strong></span>
                             </li>
                             <li class="feature-item">
-                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
                                 <span><strong>Anime & Animation engine</strong> unlocked</span>
                             </li>
                             <li class="feature-item">
-                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
                                 <span><strong>Novel & Story engine</strong> unlocked</span>
                             </li>
                             <li class="feature-item">
-                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
                                 <span><strong>Unlimited characters</strong> (Upload full chapters)</span>
                             </li>
                             <li class="feature-item">
-                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
                                 <span>High monthly generation quota</span>
                             </li>
                             <li class="feature-item">
-                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
                                 <span>Priority server generation speed</span>
                             </li>
                             <li class="feature-item">
-                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
                                 <span>Download full MP3, MP4 & EPUB files</span>
                             </li>
                         </ul>
@@ -1537,7 +1772,7 @@ That is how the body grows every day!</div>
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <div class="logo-group" style="margin-bottom: 16px;">
+                    <div class="logo-group" style="margin-bottom: 20px;">
                         <div class="logo-icon">∞</div>
                         <div>
                             <div class="logo-text" style="color: #fff;">InfinitEd</div>
@@ -1607,14 +1842,14 @@ That is how the body grows every day!</div>
             document.getElementById('nav-status-dot').classList.add('premium');
             document.getElementById('nav-status-text').innerHTML = 'Simulating: <strong style="color: var(--premium-gold);">Premium Tier</strong>';
             document.getElementById('nav-toggle-btn').innerText = 'Switch to Free Tier';
-            document.getElementById('nav-toggle-btn').style.background = 'rgba(255,255,255,0.1)';
+            document.getElementById('nav-toggle-btn').style.background = 'rgba(255,255,255,0.15)';
             document.getElementById('nav-toggle-btn').style.color = '#fff';
 
             // Update Studio Banner
             document.getElementById('banner-title').innerHTML = 'Creator Studio (<span style="color: var(--premium-gold);">Premium Mode Active</span>)';
             document.getElementById('banner-desc').innerText = 'You have full access to Anime & Animation, Novels, and Unlimited Character input!';
             document.getElementById('banner-toggle-btn').innerText = 'Simulate Free Tier';
-            document.getElementById('banner-toggle-btn').style.background = 'rgba(255,255,255,0.1)';
+            document.getElementById('banner-toggle-btn').style.background = 'rgba(255,255,255,0.2)';
             document.getElementById('banner-toggle-btn').style.color = '#fff';
 
             // Unlock Cards
@@ -1770,56 +2005,69 @@ That is how the body grows every day!</div>
             document.getElementById('output-box').style.display = 'none';
             const loadingBox = document.getElementById('loading-box');
             const loadingText = document.getElementById('loading-text');
+            const progressFill = document.getElementById('progress-fill');
+            
             loadingBox.style.display = 'block';
+            progressFill.style.width = '15%';
 
-            // Simulate Multi-step AI Workflow
-            setTimeout(() => { loadingText.innerText = "Extracting Core Academic Definitions..."; }, 1000);
+            // Simulate Multi-step AI Workflow with Progress Bar Animation
+            setTimeout(() => { 
+                loadingText.innerText = "Extracting Core Academic Definitions..."; 
+                progressFill.style.width = '45%';
+            }, 1200);
+            
             setTimeout(() => { 
                 if (selectedMode === 'music') loadingText.innerText = "Writing Rhyming Lyrics & Synthesizing AI Beats...";
                 else if (selectedMode === 'anime') loadingText.innerText = "Generating Voiceover Script & Stitching Anime Frames...";
                 else loadingText.innerText = "Weaving Concepts into Immersive Story Chapter...";
-            }, 2500);
+                progressFill.style.width = '85%';
+            }, 2600);
 
             setTimeout(() => {
-                // Hide Loading, Restore Button, Show Output
-                loadingBox.style.display = 'none';
-                document.getElementById('btn-generate').style.display = 'flex';
-                document.getElementById('output-box').style.display = 'block';
+                progressFill.style.width = '100%';
+                
+                setTimeout(() => {
+                    // Hide Loading, Restore Button, Show Output
+                    loadingBox.style.display = 'none';
+                    document.getElementById('btn-generate').style.display = 'flex';
+                    document.getElementById('output-box').style.display = 'block';
 
-                // Setup Output Titles & Views
-                document.getElementById('view-music').style.display = 'none';
-                document.getElementById('view-anime').style.display = 'none';
-                document.getElementById('view-novel').style.display = 'none';
+                    // Setup Output Titles & Views
+                    document.getElementById('view-music').style.display = 'none';
+                    document.getElementById('view-anime').style.display = 'none';
+                    document.getElementById('view-novel').style.display = 'none';
 
-                const outputBadge = document.getElementById('output-badge');
-                const outputTitle = document.getElementById('output-title');
+                    const outputBadge = document.getElementById('output-badge');
+                    const outputTitle = document.getElementById('output-title');
 
-                if (selectedMode === 'music') {
-                    outputBadge.innerText = "Rap / Music Engine";
-                    outputBadge.style.background = "var(--royal-main)";
-                    outputTitle.innerText = "Mitosis & Cell Division (Boom Bap Anthem)";
-                    document.getElementById('view-music').style.display = 'block';
-                    
-                    // Trigger Audio Playback
-                    const audioElem = document.getElementById('study-audio');
-                    if(audioElem) audioElem.play().catch(e => console.log(e));
-                } else if (selectedMode === 'anime') {
-                    outputBadge.innerText = "Anime Animation Lab";
-                    outputBadge.style.background = "var(--premium-gold)";
-                    outputBadge.style.color = "#000";
-                    outputTitle.innerText = "Mitosis: The Flawless Division (Anime Short)";
-                    document.getElementById('view-anime').style.display = 'block';
-                } else if (selectedMode === 'novel') {
-                    outputBadge.innerText = "Immersive Novel Builder";
-                    outputBadge.style.background = "var(--royal-bright)";
-                    outputBadge.style.color = "#fff";
-                    outputTitle.innerText = "The Secret of the Dividing Citadel (Sci-Fi Chapter)";
-                    document.getElementById('view-novel').style.display = 'block';
-                }
+                    if (selectedMode === 'music') {
+                        outputBadge.innerText = "Rap / Music Engine";
+                        outputBadge.style.background = "linear-gradient(135deg, var(--royal-main), var(--royal-bright))";
+                        outputBadge.style.color = "#fff";
+                        outputTitle.innerText = "Mitosis & Cell Division (Boom Bap Anthem)";
+                        document.getElementById('view-music').style.display = 'block';
+                        
+                        // Trigger Audio Playback
+                        const audioElem = document.getElementById('study-audio');
+                        if(audioElem) audioElem.play().catch(e => console.log(e));
+                    } else if (selectedMode === 'anime') {
+                        outputBadge.innerText = "Anime Animation Lab";
+                        outputBadge.style.background = "linear-gradient(135deg, var(--premium-gold), var(--premium-gold-hover))";
+                        outputBadge.style.color = "#000";
+                        outputTitle.innerText = "Mitosis: The Flawless Division (Anime Short)";
+                        document.getElementById('view-anime').style.display = 'block';
+                    } else if (selectedMode === 'novel') {
+                        outputBadge.innerText = "Immersive Novel Builder";
+                        outputBadge.style.background = "linear-gradient(135deg, #06b6d4, #3b82f6)";
+                        outputBadge.style.color = "#fff";
+                        outputTitle.innerText = "The Secret of the Dividing Citadel (Sci-Fi Chapter)";
+                        document.getElementById('view-novel').style.display = 'block';
+                    }
 
-                // Scroll to Output
-                document.getElementById('output-box').scrollIntoView({ behavior: 'smooth' });
-            }, 4000);
+                    // Scroll to Output
+                    document.getElementById('output-box').scrollIntoView({ behavior: 'smooth' });
+                }, 500);
+            }, 3800);
         }
 
         function toggleFaq(element) {
