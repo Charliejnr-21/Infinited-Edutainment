@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfinitEd | Infinity Designs Edutainment</title>
+    <style>
+        /* CSS Reset & System Fonts */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0b1329;
+            color: #f8fafc;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            outline: none;
+        }
+        
+        /* Royal Blue Color Variables & Utility Classes */
+        :root {
+            --bg-dark: #070d1f;
+            --bg-base: #0b1329;
+            --bg-card: #131e3d;
+            --bg-card-hover: #1b2a54;
+            --royal-deep: #1e3a8a;
+            --royal-main: #2563eb;
+            --royal-bright: #3b82f6;
+            --royal-light: #60a5fa;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --premium-gold: #f59e0b;
+            --premium-gold-hover: #d97706;
+            --success: #10b981;
+        }
+
+        /* Layout & Container */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, var(--royal-light) 50%, var(--royal-bright) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .text-gold {
+            color: var(--premium-gold);
+        }
+
+        /* Top Header / Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(11, 19, 41, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 16px 0;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--royal-bright), var(--royal-deep));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 22px;
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+        }
+        .logo-text {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .logo-tagline {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+        @media (max-width: 860px) {
+            .nav-links {
+                display: none;
+            }
+        }
+        .nav-link {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: color 0.2s ease;
+        }
+        .nav-link:hover {
+            color: var(--text-main);
+        }
+        .user-mode-widget {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 14px;
+        }
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--text-muted);
+            box-shadow: 0 0 8px var(--text-muted);
+        }
+        .status-dot.premium {
+            background-color: var(--premium-gold);
+            box-shadow: 0 0 10px var(--premium-gold);
+        }
+        .btn-premium-toggle {
+            background: linear-gradient(135deg, var(--premium-gold), var(--premium-gold-hover));
+            color: #000;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+            transition: all 0.2s ease;
+        }
+        .btn-premium-toggle:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 90px 0 70px 0;
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+        }
+        .hero-bg-glow {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(37,99,235,0.25) 0%, rgba(11,19,41,0) 70%);
+            z-index: -1;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(37, 99, 235, 0.15);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            color: var(--royal-light);
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: 64px;
+            max-width: 900px;
+            margin: 0 auto 24px auto;
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 42px; }
+        }
+        .hero p {
+            font-size: 20px;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+        }
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--royal-main), var(--royal-deep));
+            color: var(--text-main);
+            font-size: 18px;
+            font-weight: 700;
+            padding: 16px 36px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.6);
+            background: linear-gradient(135deg, var(--royal-bright), var(--royal-main));
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-main);
+            font-size: 18px;
+            font-weight: 600;
+            padding: 16px 36px;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Features / The 3 Engines Section */
+        .features {
+            padding: 60px 0 90px 0;
+            position: relative;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        .section-header h2 {
+            font-size: 42px;
+            margin-bottom: 16px;
+        }
+        .section-header p {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 40px 32px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(37, 99, 235, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(37, 99, 235, 0.15);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: var(--royal-bright);
+        }
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        .tier-tag {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+        .tag-free {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .tag-premium {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--premium-gold);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        /* Interactive Creator Studio */
+        .creator-studio {
+            padding: 40px 0 100px 0;
+            background: linear-gradient(180deg, var(--bg-base) 0%, var(--bg-dark) 100%);
+            id: studio;
+        }
+        .studio-wrapper {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 28px;
+            padding: 48px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        @media (max-width: 768px) {
+            .studio-wrapper { padding: 28px 20px; }
+        }
+        .studio-banner {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.6), rgba(15, 23, 42, 0.8));
+            border: 1px solid var(--royal-main);
+            border-radius: 18px;
+            padding: 24px 32px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .banner-left h4 {
+            font-size: 22px;
+            margin-bottom: 6px;
+        }
+        .banner-left p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+        
+        /* Step Sections */
+        .step-section {
+            margin-bottom: 44px;
+        }
+        .step-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--royal-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .step-title {
+            font-size: 28px;
+            margin-bottom: 24px;
+            font-weight: 800;
+        }
+
+        /* Step 1 Input Controls */
+        .input-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .input-tabs {
+            display: flex;
+            gap: 10px;
+        }
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 22px;
+            border-radius: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s ease;
+        }
+        .tab-btn.active {
+            background: var(--royal-main);
+            color: var(--text-main);
+            border-color: var(--royal-bright);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+        .tab-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+        }
+        .btn-sample {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--success);
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        .btn-sample:hover {
+            background: rgba(16, 185, 129, 0.25);
+        }
+        .textarea-box {
+            position: relative;
+            margin-bottom: 16px;
+        }
+        textarea {
+            width: 100%;
+            height: 220px;
+            background: rgba(7, 13, 31, 0.7);
+            border: 2px solid rgba(255, 255, 255, 0.12);
+            border-radius: 18px;
+            padding: 24px;
+            color: var(--text-main);
+            font-size: 16px;
+            line-height: 1.6;
+            resize: vertical;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        textarea:focus {
+            border-color: var(--royal-bright);
+            outline: none;
+        }
+        .char-counter {
+            text-align: right;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+        .char-counter.limit-exceeded {
+            color: #ef4444;
+        }
+
+        /* Step 2 Mode Selector */
+        .mode-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        .mode-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 28px 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .mode-card.active {
+            border-color: var(--royal-bright);
+            background: rgba(37, 99, 235, 0.1);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+        }
+        .mode-card:hover:not(.locked) {
+            border-color: rgba(37, 99, 235, 0.4);
+            background: rgba(255, 255, 255, 0.06);
+        }
+        .mode-card.locked {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .lock-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(7, 13, 31, 0.85);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        .mode-card.locked .lock-overlay {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .lock-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(245, 158, 11, 0.2);
+            border: 1px solid var(--premium-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--premium-gold);
+            margin-bottom: 12px;
+        }
+        .mode-icon {
+            width: 54px;
+            height: 54px;
+            background: var(--royal-deep);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+        .mode-card h4 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+        .mode-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Options Selector */
+        .sub-options-box {
+            background: rgba(7, 13, 31, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+        .sub-options-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--royal-light);
+        }
+        .options-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .option-chip {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option-chip.active {
+            background: var(--royal-main);
+            color: var(--text-main);
+            border-color: var(--royal-bright);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+        .option-chip:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Generate Button & Loading State */
+        .btn-generate {
+            width: 100%;
+            padding: 22px;
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--royal-main), var(--royal-deep));
+            color: var(--text-main);
+            border-radius: 18px;
+            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            transition: all 0.3s;
+        }
+        .btn-generate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 40px rgba(37, 99, 235, 0.6);
+            background: linear-gradient(135deg, var(--royal-bright), var(--royal-main));
+        }
+        
+        .loading-container {
+            display: none;
+            text-align: center;
+            padding: 40px 0;
+        }
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--royal-bright);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 24px auto;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .loading-status {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+        .loading-sub {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        /* Output Presentation Display */
+        .output-container {
+            display: none;
+            margin-top: 48px;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+            padding-top: 48px;
+        }
+        .output-card {
+            background: rgba(7, 13, 31, 0.6);
+            border: 1px solid rgba(37, 99, 235, 0.4);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+        @media (max-width: 768px) {
+            .output-card { padding: 24px 16px; }
+        }
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .output-title-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .output-badge {
+            background: var(--royal-main);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+        }
+        .output-title {
+            font-size: 26px;
+            font-weight: 800;
+        }
+        .btn-download {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 24px;
+            border-radius: 14px;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s;
+        }
+        .btn-download:hover {
+            background: var(--royal-bright);
+            border-color: var(--royal-bright);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        /* Mode Specific Outputs */
+        .music-output, .anime-output, .novel-output {
+            display: none;
+        }
+        .music-player-box {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(11, 19, 41, 0.8));
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+            margin-bottom: 36px;
+        }
+        .vinyl-cover {
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(135deg, var(--royal-bright), var(--royal-deep));
+            border-radius: 24px;
+            margin: 0 auto 24px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.4);
+        }
+        .song-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        .song-genre {
+            color: var(--royal-light);
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        audio {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 12px;
+        }
+        .lyrics-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 32px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .lyrics-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--royal-light);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .lyrics-text {
+            font-size: 18px;
+            line-height: 2;
+            color: var(--text-main);
+            white-space: pre-line;
+        }
+
+        /* Anime Output */
+        .anime-frame {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            margin-bottom: 32px;
+        }
+        .anime-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-height: 550px;
+            object-fit: cover;
+        }
+        .anime-subtitle-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 100%);
+            padding: 40px 32px 24px 32px;
+            text-align: center;
+        }
+        .anime-subtitle-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            letter-spacing: 0.5px;
+        }
+        .anime-script-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 32px;
+        }
+        .anime-script-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--royal-light);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+        .script-dialogue {
+            font-size: 17px;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+        .script-dialogue strong {
+            color: var(--text-main);
+        }
+
+        /* Novel Output */
+        .novel-reader {
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 48px 56px;
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
+        }
+        @media (max-width: 768px) {
+            .novel-reader { padding: 28px 20px; }
+        }
+        .novel-chapter {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--premium-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+        .novel-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 32px;
+            color: var(--text-main);
+        }
+        .novel-body {
+            font-size: 19px;
+            line-height: 1.9;
+            color: #e2e8f0;
+            text-align: justify;
+        }
+        .novel-body p {
+            margin-bottom: 24px;
+        }
+        .concept-highlight {
+            color: var(--royal-light);
+            font-weight: 700;
+            background: rgba(37, 99, 235, 0.15);
+            padding: 2px 6px;
+            border-radius: 6px;
+            border: 1px solid rgba(37, 99, 235, 0.3);
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0 100px 0;
+            background: var(--bg-base);
+            position: relative;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 36px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 28px;
+            padding: 48px 40px;
+            position: relative;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .pricing-card.popular {
+            border: 2px solid var(--premium-gold);
+            background: linear-gradient(180deg, var(--bg-card) 0%, rgba(20, 32, 66, 0.9) 100%);
+            box-shadow: 0 20px 60px rgba(245, 158, 11, 0.2);
+        }
+        .popular-badge {
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--premium-gold), var(--premium-gold-hover));
+            color: #000;
+            font-weight: 800;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 6px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+        }
+        .tier-header {
+            margin-bottom: 32px;
+        }
+        .tier-name {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        .tier-price {
+            font-size: 54px;
+            font-weight: 900;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: baseline;
+        }
+        .price-period {
+            font-size: 18px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .tier-desc {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+        .feature-list {
+            list-style: none;
+            margin-bottom: 44px;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 16px;
+            margin-bottom: 18px;
+            color: var(--text-main);
+        }
+        .feature-item.omitted {
+            color: var(--text-muted);
+            opacity: 0.5;
+        }
+        .icon-check {
+            color: var(--success);
+            flex-shrink: 0;
+        }
+        .icon-cross {
+            color: #ef4444;
+            flex-shrink: 0;
+        }
+        .btn-tier {
+            width: 100%;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .btn-tier-free {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-main);
+        }
+        .btn-tier-free:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+        .btn-tier-premium {
+            background: linear-gradient(135deg, var(--premium-gold), var(--premium-gold-hover));
+            color: #000;
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4);
+        }
+        .btn-tier-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.6);
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 60px 0 100px 0;
+            background: var(--bg-dark);
+        }
+        .faq-list {
+            max-width: 840px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+        .faq-question {
+            padding: 24px 32px;
+            font-size: 19px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            color: var(--text-main);
+        }
+        .faq-answer {
+            padding: 0 32px 28px 32px;
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.8;
+            display: none;
+        }
+        .faq-item.active {
+            border-color: rgba(37, 99, 235, 0.4);
+            background: var(--bg-card-hover);
+        }
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        .faq-toggle-icon {
+            font-size: 24px;
+            color: var(--royal-light);
+            transition: transform 0.2s;
+        }
+        .faq-item.active .faq-toggle-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Footer */
+        footer {
+            background: #050914;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 64px 0 40px 0;
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 64px;
+        }
+        @media (max-width: 768px) {
+            .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+        }
+        .footer-desc {
+            margin-top: 16px;
+            max-width: 360px;
+            line-height: 1.7;
+        }
+        .footer-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 24px;
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 14px;
+        }
+        .footer-links a:hover {
+            color: var(--text-main);
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .brand-highlight {
+            color: var(--royal-light);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo-group">
+                <div class="logo-icon">∞</div>
+                <div>
+                    <div class="logo-text">InfinitEd</div>
+                    <div class="logo-tagline">Infinity Designs Edutainment</div>
+                </div>
+            </a>
+
+            <nav class="nav-links">
+                <a href="#features" class="nav-link">How It Works</a>
+                <a href="#studio" class="nav-link">Creator Studio</a>
+                <a href="#pricing" class="nav-link">Pricing Tiers</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+            </nav>
+
+            <div class="user-mode-widget">
+                <div id="nav-status-dot" class="status-dot"></div>
+                <span id="nav-status-text">Simulating: <strong>Free Tier</strong></span>
+                <button id="nav-toggle-btn" class="btn-premium-toggle" onclick="togglePremium()">Upgrade Simulation</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg-glow"></div>
+        <div class="container">
+            <div class="badge">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-2 2.5-3-1-1 3-3 1 1 3-2 2.5 2 2.5-1 3 3 1 1 3 3-1 2 2.5 2-2.5 3 1 1-3 3-1-1-3 2-2.5-2-2.5 1-3-3-1-1-3-3 1-2-2.5Z"/><path d="m9 12 2 2 4-4"/></svg>
+                Next-Gen AI Edutainment Platform | All Music Genres Included
+            </div>
+            <h1>Stop Memorizing. <span class="text-gradient">Start Experiencing.</span></h1>
+            <p>Upload your dense school study materials and let AI instantly transform them into banger rap songs, breathtaking anime clips, and immersive fiction novels.</p>
+            
+            <div class="cta-group">
+                <a href="#studio" class="btn-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    Launch Creator Suite
+                </a>
+                <a href="#pricing" class="btn-secondary">View Premium Tiers</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features / The 3 Engines Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Three Transformation Engines</h2>
+                <p>InfinitEd uses specialized generative AI pipelines to cater to your specific learning style, keeping you deeply engaged.</p>
+            </div>
+
+            <div class="grid-3">
+                <!-- Engine 1 -->
+                <div class="feature-card">
+                    <div class="tier-tag tag-free">Free & Premium</div>
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                    </div>
+                    <h3>Sonic Rap & Song Studio</h3>
+                    <p>Auditory learner? Turn dense textbook paragraphs into incredibly catchy music tracks. The free tier gives you access to 100-character teasers across any music genre, from 90s Boom Bap to Lo-Fi Chill.</p>
+                </div>
+
+                <!-- Engine 2 -->
+                <div class="feature-card">
+                    <div class="tier-tag tag-premium">Premium Only</div>
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2"/></svg>
+                    </div>
+                    <h3>Anime & Animation Lab</h3>
+                    <p>Visual learner? Watch your study materials come to life as premium anime clips. Our pipeline generates an AI voiceover script and stitches together cinematic visual clips so you can watch your homework.</p>
+                </div>
+
+                <!-- Engine 3 -->
+                <div class="feature-card">
+                    <div class="tier-tag tag-premium">Premium Only</div>
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 5h10"/><path d="M6 9h10"/></svg>
+                    </div>
+                    <h3>Immersive Novel Builder</h3>
+                    <p>Love stories? Weave difficult academic concepts into gripping sci-fi adventures, murder mysteries, or high fantasy tales. Easily understand complex definitions through rich storytelling.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Creator Studio -->
+    <section id="studio" class="creator-studio">
+        <div class="container">
+            <div class="studio-wrapper">
+                
+                <!-- Account Status Banner -->
+                <div class="studio-banner">
+                    <div class="banner-left">
+                        <h4 id="banner-title">Creator Studio (Free Mode Active)</h4>
+                        <p id="banner-desc">You are currently testing the Free Tier: 100-character limit, Music/Song generation only.</p>
+                    </div>
+                    <div>
+                        <button id="banner-toggle-btn" class="btn-premium-toggle" style="padding: 12px 24px; font-size: 15px;" onclick="togglePremium()">
+                            🚀 Unlock Premium Simulation Mode
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 1: Input -->
+                <div class="step-section">
+                    <div class="step-label">Step 1 of 3</div>
+                    <h3 class="step-title">Upload or Paste Study Material</h3>
+                    
+                    <div class="input-controls">
+                        <div class="input-tabs">
+                            <button class="tab-btn active" onclick="switchTab('paste')">Paste Text</button>
+                            <button class="tab-btn" onclick="switchTab('upload')">Upload Document (PDF/DOCX)</button>
+                        </div>
+                        <button class="btn-sample" onclick="loadSampleText()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
+                            Insert Sample Biology Notes
+                        </button>
+                    </div>
+
+                    <div class="textarea-box">
+                        <textarea id="study-input" placeholder="Paste your study notes, textbook paragraphs, or lecture bullet points here..." oninput="updateCharCount()"></textarea>
+                        <div id="char-counter" class="char-counter">0 / 100 characters (Free Limit)</div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Choose Mode & Genre -->
+                <div class="step-section">
+                    <div class="step-label">Step 2 of 3</div>
+                    <h3 class="step-title">Choose Your Edutainment Transformation</h3>
+
+                    <div class="mode-grid">
+                        <!-- Mode 1: Music -->
+                        <div id="mode-music" class="mode-card active" onclick="selectMode('music')">
+                            <div class="mode-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                            </div>
+                            <h4>Song & Rap Studio</h4>
+                            <p>Generate a rhythmic, factual hit track to listen to on the go.</p>
+                        </div>
+
+                        <!-- Mode 2: Anime -->
+                        <div id="mode-anime" class="mode-card locked" onclick="selectMode('anime')">
+                            <div class="lock-overlay">
+                                <div class="lock-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                </div>
+                                <h4 style="color: #fff; font-size: 18px; margin-bottom: 6px;">Premium Feature</h4>
+                                <p style="color: #cbd5e1; font-size: 13px;">Unlock Premium Simulation above to transform notes into Anime!</p>
+                            </div>
+                            <div class="mode-icon" style="background: var(--royal-main);">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2"/></svg>
+                            </div>
+                            <h4>Anime & Animation Lab</h4>
+                            <p>Turn notes into an animated Japanese-style short film with voiceover.</p>
+                        </div>
+
+                        <!-- Mode 3: Novel -->
+                        <div id="mode-novel" class="mode-card locked" onclick="selectMode('novel')">
+                            <div class="lock-overlay">
+                                <div class="lock-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                </div>
+                                <h4 style="color: #fff; font-size: 18px; margin-bottom: 6px;">Premium Feature</h4>
+                                <p style="color: #cbd5e1; font-size: 13px;">Unlock Premium Simulation above to transform notes into Novels!</p>
+                            </div>
+                            <div class="mode-icon" style="background: var(--royal-bright);">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 5h10"/><path d="M6 9h10"/></svg>
+                            </div>
+                            <h4>Immersive Novel Builder</h4>
+                            <p>Absorb core concepts through thrilling fiction & mystery stories.</p>
+                        </div>
+                    </div>
+
+                    <!-- Sub Options (Dynamic based on selected mode) -->
+                    <div class="sub-options-box">
+                        <div id="sub-title" class="sub-options-title">Select Music Genre (All Genres Included in Free & Premium)</div>
+                        <div id="sub-options" class="options-grid">
+                            <div class="option-chip active" onclick="selectChip(this)">90s Boom Bap Rap</div>
+                            <div class="option-chip" onclick="selectChip(this)">Synthwave Pop</div>
+                            <div class="option-chip" onclick="selectChip(this)">Lo-Fi Chill Beats</div>
+                            <div class="option-chip" onclick="selectChip(this)">Cyberpunk EDM</div>
+                            <div class="option-chip" onclick="selectChip(this)">Acoustic Indie Rock</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Generate -->
+                <div class="step-section" style="margin-bottom: 0;">
+                    <button id="btn-generate" class="btn-generate" onclick="startGeneration()">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        Transform Study Material Now
+                    </button>
+
+                    <!-- Loading Animation -->
+                    <div id="loading-box" class="loading-container">
+                        <div class="spinner"></div>
+                        <div id="loading-text" class="loading-status">Parsing Study Concepts...</div>
+                        <div class="loading-sub">InfinitEd AI orchestrator is working its magic</div>
+                    </div>
+                </div>
+
+                <!-- Output Display Section -->
+                <div id="output-box" class="output-container">
+                    <div class="output-card">
+                        <div class="output-header">
+                            <div class="output-title-group">
+                                <div id="output-badge" class="output-badge">Rap / Music Mode</div>
+                                <h3 id="output-title" class="output-title">Mitosis & Cell Division (Boom Bap Anthem)</h3>
+                            </div>
+                            <button class="btn-download" onclick="alert('File download initiated successfully!')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                                Download Asset
+                            </button>
+                        </div>
+
+                        <!-- 1. Music Output View -->
+                        <div id="view-music" class="music-output">
+                            <div class="music-player-box">
+                                <div class="vinyl-cover">
+                                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                                </div>
+                                <div class="song-title">Mitosis Breakdown (Educational Rap)</div>
+                                <div class="song-genre">Genre: 90s Boom Bap Rap</div>
+                                
+                                <!-- Audio Embedded Player -->
+                                <audio controls autoplay id="study-audio">
+                                    <source src="__AUDIO_MP3_B64__" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+
+                            <div class="lyrics-box">
+                                <div class="lyrics-title">Generated Educational Lyrics</div>
+                                <div class="lyrics-text">Yo, listen up, let's break down mitosis!
+Cell division, keeping focus.
+Prophase starts, chromosomes pack tight.
+Metaphase lines them up in the light.
+Anaphase pulls them apart to the poles.
+Telophase splits them, fulfilling their goals.
+Two new cells, exact same DNA.
+That is how the body grows every day!</div>
+                            </div>
+                        </div>
+
+                        <!-- 2. Anime Output View -->
+                        <div id="view-anime" class="anime-output">
+                            <div class="anime-frame">
+                                <img src="__ANIME_IMAGE_B64__" alt="Anime Biology Screen" class="anime-image">
+                                <div class="anime-subtitle-overlay">
+                                    <div class="anime-subtitle-text">"Look closely! The chromosomes are aligning in the center for Metaphase!"</div>
+                                </div>
+                            </div>
+
+                            <div class="anime-script-box">
+                                <div class="anime-script-title">Generated Script & Narrative Breakdown</div>
+                                <div class="script-dialogue"><strong>[Scene 1: High-Tech Hologram Room]</strong> A brilliant neon-lit high school student stands before a floating 3D holographic projection of a dividing cell.</div>
+                                <div class="script-dialogue"><strong>[Protagonist Voiceover (Energetic Shonen Style)]:</strong> "We can't fail this exam! When the cell prepares to split, it enters Prophase. The chromatin condenses into distinct chromosomes. It's preparing for the ultimate division!"</div>
+                                <div class="script-dialogue"><strong>[Visual Effects]:</strong> Cinematic camera rotation around the glowing blue DNA strands as spindle fibers attach to the centromeres.</div>
+                            </div>
+                        </div>
+
+                        <!-- 3. Novel Output View -->
+                        <div id="view-novel" class="novel-output">
+                            <div class="novel-reader">
+                                <div class="novel-chapter">Chapter 1: The Twin Cores of Mitosis</div>
+                                <div class="novel-title">The Secret of the Dividing Citadel</div>
+                                <div class="novel-body">
+                                    <p>The starship <em>Cellular Vengeance</em> hummed with an ancient energy. Captain Alara stared at the central holographic console, witnessing the phenomenon known to the ancients as <span class="concept-highlight">Mitosis</span>—the sacred ritual of flawless duplication.</p>
+                                    <p>"Captain," Lieutenant Ren called out, his fingers dancing across the glowing panels. "The core is entering <span class="concept-highlight">Prophase</span>. The scattered data archives are condensing into tightly wound physical drives—chromosomes of pure light!"</p>
+                                    <p>Before Alara could respond, the gravitational stabilizers engaged. "They are lining up along the equator!" she whispered in awe. It was the flawless symmetry of <span class="concept-highlight">Metaphase</span>. Every piece of code, every memory of the starship, poised perfectly in the light before the great separation.</p>
+                                    <p>With a thunderous hum, <span class="concept-highlight">Anaphase</span> tore across the room. The twin drives were pulled relentlessly toward opposite poles of the citadel. And as the bulkheads closed in <span class="concept-highlight">Telophase</span>, two identical citadels were born, harboring the exact same DNA, ready to conquer the galaxy.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Transparent, Student-Friendly Pricing</h2>
+                <p>Start for free to experience the vibe, then upgrade to Premium to unlock full anime clips, epic novels, and unlimited book chapters.</p>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- Free Tier -->
+                <div class="pricing-card">
+                    <div>
+                        <div class="tier-header">
+                            <h3 class="tier-name">Free Teaser Tier</h3>
+                            <div class="tier-price">$0 <span class="price-period">/ month</span></div>
+                            <p class="tier-desc">Perfect for testing the waters and generating quick musical study summaries.</p>
+                        </div>
+
+                        <ul class="feature-list">
+                            <li class="feature-item">
+                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <span><strong>Song & Rap Generator</strong> access</span>
+                            </li>
+                            <li class="feature-item">
+                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <span><strong>Any music genre</strong> included</span>
+                            </li>
+                            <li class="feature-item">
+                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <span>100-character input teaser limit</span>
+                            </li>
+                            <li class="feature-item">
+                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <span>Limited monthly uses (3-5 generations)</span>
+                            </li>
+                            <li class="feature-item omitted">
+                                <svg class="icon-cross" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                                <span>Anime & Animation mode locked</span>
+                            </li>
+                            <li class="feature-item omitted">
+                                <svg class="icon-cross" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                                <span>Novel & Story mode locked</span>
+                            </li>
+                            <li class="feature-item omitted">
+                                <svg class="icon-cross" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                                <span>Standard server queue speed</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="btn-tier btn-tier-free" onclick="setModeFree()">Active Free Mode</button>
+                </div>
+
+                <!-- Premium Tier -->
+                <div class="pricing-card popular">
+                    <div class="popular-badge">★ Most Popular for Students</div>
+                    <div>
+                        <div class="tier-header">
+                            <h3 class="tier-name">Premium Scholar Tier</h3>
+                            <div class="tier-price">$9.99 <span class="price-period">/ month</span></div>
+                            <p class="tier-desc">The ultimate edutainment package. Unlock every advanced AI engine and ace your exams.</p>
+                        </div>
+
+                        <ul class="feature-list">
+                            <li class="feature-item">
+                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <span><strong>Access to EVERYTHING</strong></span>
+                            </li>
+                            <li class="feature-item">
+                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <span><strong>Anime & Animation engine</strong> unlocked</span>
+                            </li>
+                            <li class="feature-item">
+                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <span><strong>Novel & Story engine</strong> unlocked</span>
+                            </li>
+                            <li class="feature-item">
+                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <span><strong>Unlimited characters</strong> (Upload full chapters)</span>
+                            </li>
+                            <li class="feature-item">
+                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <span>High monthly generation quota</span>
+                            </li>
+                            <li class="feature-item">
+                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <span>Priority server generation speed</span>
+                            </li>
+                            <li class="feature-item">
+                                <svg class="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                                <span>Download full MP3, MP4 & EPUB files</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="btn-tier btn-tier-premium" onclick="setModePremium()">🚀 Unlock Premium Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know about how InfinitEd works and how we monetize.</p>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item active" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <span>How exactly does the AI turn my study notes into songs or anime?</span>
+                        <span class="faq-toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Our platform operates as an advanced AI orchestrator. First, we parse your uploaded document or pasted text to extract the core academic concepts and definitions. Next, we use fine-tuned Large Language Models to structure those concepts into highly catchy rhyming lyrics or dramatic animation scripts. Finally, we route these to industry-leading generative audio and video AI models (like Suno, ElevenLabs, and Runway) to synthesize the final master media file!
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <span>What is the difference between the Free Tier and Premium Tier?</span>
+                        <span class="faq-toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        The Free Tier is designed as a teaser to let you experience the magic of musical study notes. It permits up to 100 characters per submission, focuses exclusively on the Song/Rap generator, and offers 3-5 monthly generations across any music genre. The Premium Tier ($9.99/mo) unlocks the entire suite: full access to the Anime & Animation engine, the Immersive Novel builder, unlimited character inputs (allowing you to upload entire textbook chapters), and priority generation speeds.
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <span>Can I choose any music genre in the Free Tier?</span>
+                        <span class="faq-toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! As requested in our core platform design, all music genres—including 90s Boom Bap Rap, Lo-Fi Chill Beats, Synthwave Pop, Cyberpunk EDM, and Acoustic Rock—are fully accessible in both the Free Tier and the Premium Tier.
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <span>What file formats can I upload?</span>
+                        <span class="faq-toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        You can paste raw text directly into the studio, or upload standard document formats including PDF, Microsoft Word (.docx), and PowerPoint (.pptx) slides. Our backend parsers automatically clean and structure the text before processing.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="logo-group" style="margin-bottom: 16px;">
+                        <div class="logo-icon">∞</div>
+                        <div>
+                            <div class="logo-text" style="color: #fff;">InfinitEd</div>
+                            <div class="logo-tagline">Infinity Designs Edutainment</div>
+                        </div>
+                    </div>
+                    <p class="footer-desc">Empowering students worldwide by turning complex, mundane study materials into captivating entertainment experiences. Stop memorizing, start experiencing.</p>
+                </div>
+
+                <div>
+                    <div class="footer-title">Platform Engines</div>
+                    <ul class="footer-links">
+                        <li><a href="#studio" onclick="selectMode('music')">Sonic Rap & Song Studio</a></li>
+                        <li><a href="#studio" onclick="selectMode('anime')">Anime & Animation Lab</a></li>
+                        <li><a href="#studio" onclick="selectMode('novel')">Immersive Novel Builder</a></li>
+                        <li><a href="#pricing">Compare Pricing Tiers</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="footer-title">For Students</div>
+                    <ul class="footer-links">
+                        <li><a href="#features">How It Works</a></li>
+                        <li><a href="#studio">Creator Suite</a></li>
+                        <li><a href="#faq">Student FAQ</a></li>
+                        <li><a href="#">Exam Prep Guides</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="footer-title">Company & Legal</div>
+                    <ul class="footer-links">
+                        <li><a href="#">About Infinity Designs</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>© 2026 <span class="brand-highlight">Infinity Designs Edutainment</span>. All rights reserved.</div>
+                <div>Designed with passion for students everywhere.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Interactive Simulation Logic -->
+    <script>
+        let isPremium = false;
+        let selectedMode = 'music';
+
+        const sampleText = "Mitosis is a process of cell division where a single cell divides into two identical daughter cells. The main stages are Prophase (chromosomes condense), Metaphase (chromosomes align in the center), Anaphase (chromosomes are pulled apart to opposite poles), and Telophase (nuclei reform and the cell splits).";
+
+        function togglePremium() {
+            if (isPremium) {
+                setModeFree();
+            } else {
+                setModePremium();
+            }
+        }
+
+        function setModePremium() {
+            isPremium = true;
+            
+            // Update Top Nav Widget
+            document.getElementById('nav-status-dot').classList.add('premium');
+            document.getElementById('nav-status-text').innerHTML = 'Simulating: <strong style="color: var(--premium-gold);">Premium Tier</strong>';
+            document.getElementById('nav-toggle-btn').innerText = 'Switch to Free Tier';
+            document.getElementById('nav-toggle-btn').style.background = 'rgba(255,255,255,0.1)';
+            document.getElementById('nav-toggle-btn').style.color = '#fff';
+
+            // Update Studio Banner
+            document.getElementById('banner-title').innerHTML = 'Creator Studio (<span style="color: var(--premium-gold);">Premium Mode Active</span>)';
+            document.getElementById('banner-desc').innerText = 'You have full access to Anime & Animation, Novels, and Unlimited Character input!';
+            document.getElementById('banner-toggle-btn').innerText = 'Simulate Free Tier';
+            document.getElementById('banner-toggle-btn').style.background = 'rgba(255,255,255,0.1)';
+            document.getElementById('banner-toggle-btn').style.color = '#fff';
+
+            // Unlock Cards
+            document.getElementById('mode-anime').classList.remove('locked');
+            document.getElementById('mode-novel').classList.remove('locked');
+
+            // Update Char Counter
+            updateCharCount();
+
+            // Scroll to studio if called from pricing
+            document.getElementById('studio').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function setModeFree() {
+            isPremium = false;
+            
+            // Update Top Nav Widget
+            document.getElementById('nav-status-dot').classList.remove('premium');
+            document.getElementById('nav-status-text').innerHTML = 'Simulating: <strong>Free Tier</strong>';
+            document.getElementById('nav-toggle-btn').innerText = 'Upgrade Simulation';
+            document.getElementById('nav-toggle-btn').style.background = 'linear-gradient(135deg, var(--premium-gold), var(--premium-gold-hover))';
+            document.getElementById('nav-toggle-btn').style.color = '#000';
+
+            // Update Studio Banner
+            document.getElementById('banner-title').innerHTML = 'Creator Studio (Free Mode Active)';
+            document.getElementById('banner-desc').innerText = 'You are currently testing the Free Tier: 100-character limit, Music/Song generation only.';
+            document.getElementById('banner-toggle-btn').innerText = '🚀 Unlock Premium Simulation Mode';
+            document.getElementById('banner-toggle-btn').style.background = 'linear-gradient(135deg, var(--premium-gold), var(--premium-gold-hover))';
+            document.getElementById('banner-toggle-btn').style.color = '#000';
+
+            // Lock Cards
+            document.getElementById('mode-anime').classList.add('locked');
+            document.getElementById('mode-novel').classList.add('locked');
+
+            // Fallback to music mode if anime or novel was selected
+            if (selectedMode !== 'music') {
+                selectMode('music');
+            }
+
+            // Update Char Counter
+            updateCharCount();
+            
+            document.getElementById('studio').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function switchTab(type) {
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(t => t.classList.remove('active'));
+            if (type === 'paste') {
+                tabs[0].classList.add('active');
+                document.getElementById('study-input').placeholder = "Paste your study notes, textbook paragraphs, or lecture bullet points here...";
+            } else {
+                tabs[1].classList.add('active');
+                document.getElementById('study-input').placeholder = "[Simulated Document Upload Mode]\n\nClick 'Insert Sample Biology Notes' above to simulate extracting text from an uploaded PDF or DOCX file!";
+            }
+        }
+
+        function loadSampleText() {
+            const textarea = document.getElementById('study-input');
+            if (!isPremium) {
+                // Slice to 100 chars for free mode demonstration
+                textarea.value = sampleText.substring(0, 100);
+                alert("Loaded sample notes! (Truncated to 100 characters to demonstrate Free Tier limits. Upgrade simulation to unlock full text!)");
+            } else {
+                textarea.value = sampleText;
+            }
+            updateCharCount();
+        }
+
+        function updateCharCount() {
+            const text = document.getElementById('study-input').value;
+            const counter = document.getElementById('char-counter');
+            
+            if (!isPremium) {
+                counter.innerText = `${text.length} / 100 characters (Free Limit)`;
+                if (text.length > 100) {
+                    counter.classList.add('limit-exceeded');
+                } else {
+                    counter.classList.remove('limit-exceeded');
+                }
+            } else {
+                counter.innerText = `${text.length} / Unlimited (Premium Scholar Mode)`;
+                counter.classList.remove('limit-exceeded');
+            }
+        }
+
+        function selectMode(mode) {
+            if (!isPremium && (mode === 'anime' || mode === 'novel')) {
+                alert("This feature is locked in the Free Tier! Click 'Unlock Premium Simulation Mode' in the banner above to test it!");
+                return;
+            }
+
+            selectedMode = mode;
+            
+            // Update Active Card Styles
+            document.getElementById('mode-music').classList.remove('active');
+            document.getElementById('mode-anime').classList.remove('active');
+            document.getElementById('mode-novel').classList.remove('active');
+            document.getElementById(`mode-${mode}`).classList.add('active');
+
+            // Update Sub Options Title & Chips
+            const subTitle = document.getElementById('sub-title');
+            const subOptions = document.getElementById('sub-options');
+
+            if (mode === 'music') {
+                subTitle.innerText = "Select Music Genre (All Genres Included in Free & Premium)";
+                subOptions.innerHTML = `
+                    <div class="option-chip active" onclick="selectChip(this)">90s Boom Bap Rap</div>
+                    <div class="option-chip" onclick="selectChip(this)">Synthwave Pop</div>
+                    <div class="option-chip" onclick="selectChip(this)">Lo-Fi Chill Beats</div>
+                    <div class="option-chip" onclick="selectChip(this)">Cyberpunk EDM</div>
+                    <div class="option-chip" onclick="selectChip(this)">Acoustic Indie Rock</div>
+                `;
+            } else if (mode === 'anime') {
+                subTitle.innerText = "Select Animation Art Style & Visual Theme";
+                subOptions.innerHTML = `
+                    <div class="option-chip active" onclick="selectChip(this)">Shonen Action Animation</div>
+                    <div class="option-chip" onclick="selectChip(this)">Cyberpunk Neo-Tokyo</div>
+                    <div class="option-chip" onclick="selectChip(this)">Studio Ghibli Fantasy</div>
+                    <div class="option-chip" onclick="selectChip(this)">Futuristic Hologram Lab</div>
+                `;
+            } else if (mode === 'novel') {
+                subTitle.innerText = "Select Immersive Storytelling Genre";
+                subOptions.innerHTML = `
+                    <div class="option-chip active" onclick="selectChip(this)">Deep Space Sci-Fi Odyssey</div>
+                    <div class="option-chip" onclick="selectChip(this)">Sherlock Holmes Murder Mystery</div>
+                    <div class="option-chip" onclick="selectChip(this)">Epic Medieval Fantasy</div>
+                    <div class="option-chip" onclick="selectChip(this)">Cyberpunk Dystopia</div>
+                `;
+            }
+        }
+
+        function selectChip(element) {
+            const chips = element.parentElement.querySelectorAll('.option-chip');
+            chips.forEach(c => c.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function startGeneration() {
+            const text = document.getElementById('study-input').value;
+            if (!text.trim()) {
+                alert("Please paste some study notes or click 'Insert Sample Biology Notes' first!");
+                return;
+            }
+
+            if (!isPremium && text.length > 100) {
+                alert("Your input exceeds the 100-character Free Tier limit! Please trim your text or unlock the Premium Simulation mode above.");
+                return;
+            }
+
+            // Hide Generate Button, Show Loading Box
+            document.getElementById('btn-generate').style.display = 'none';
+            document.getElementById('output-box').style.display = 'none';
+            const loadingBox = document.getElementById('loading-box');
+            const loadingText = document.getElementById('loading-text');
+            loadingBox.style.display = 'block';
+
+            // Simulate Multi-step AI Workflow
+            setTimeout(() => { loadingText.innerText = "Extracting Core Academic Definitions..."; }, 1000);
+            setTimeout(() => { 
+                if (selectedMode === 'music') loadingText.innerText = "Writing Rhyming Lyrics & Synthesizing AI Beats...";
+                else if (selectedMode === 'anime') loadingText.innerText = "Generating Voiceover Script & Stitching Anime Frames...";
+                else loadingText.innerText = "Weaving Concepts into Immersive Story Chapter...";
+            }, 2500);
+
+            setTimeout(() => {
+                // Hide Loading, Restore Button, Show Output
+                loadingBox.style.display = 'none';
+                document.getElementById('btn-generate').style.display = 'flex';
+                document.getElementById('output-box').style.display = 'block';
+
+                // Setup Output Titles & Views
+                document.getElementById('view-music').style.display = 'none';
+                document.getElementById('view-anime').style.display = 'none';
+                document.getElementById('view-novel').style.display = 'none';
+
+                const outputBadge = document.getElementById('output-badge');
+                const outputTitle = document.getElementById('output-title');
+
+                if (selectedMode === 'music') {
+                    outputBadge.innerText = "Rap / Music Engine";
+                    outputBadge.style.background = "var(--royal-main)";
+                    outputTitle.innerText = "Mitosis & Cell Division (Boom Bap Anthem)";
+                    document.getElementById('view-music').style.display = 'block';
+                    
+                    // Trigger Audio Playback
+                    const audioElem = document.getElementById('study-audio');
+                    if(audioElem) audioElem.play().catch(e => console.log(e));
+                } else if (selectedMode === 'anime') {
+                    outputBadge.innerText = "Anime Animation Lab";
+                    outputBadge.style.background = "var(--premium-gold)";
+                    outputBadge.style.color = "#000";
+                    outputTitle.innerText = "Mitosis: The Flawless Division (Anime Short)";
+                    document.getElementById('view-anime').style.display = 'block';
+                } else if (selectedMode === 'novel') {
+                    outputBadge.innerText = "Immersive Novel Builder";
+                    outputBadge.style.background = "var(--royal-bright)";
+                    outputBadge.style.color = "#fff";
+                    outputTitle.innerText = "The Secret of the Dividing Citadel (Sci-Fi Chapter)";
+                    document.getElementById('view-novel').style.display = 'block';
+                }
+
+                // Scroll to Output
+                document.getElementById('output-box').scrollIntoView({ behavior: 'smooth' });
+            }, 4000);
+        }
+
+        function toggleFaq(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
